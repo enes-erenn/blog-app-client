@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Posts.module.scss";
-
-interface PostType {
-  title: string;
-  desc: string;
-  id: string;
-  img: string;
-}
+import { PostType } from "../../types/types";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
