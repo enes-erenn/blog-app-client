@@ -1,14 +1,20 @@
 export interface PostType {
-  title: string;
-  desc: string;
-  id: string;
-  img: string;
+  title?: string;
+  desc?: string;
+  id?: string;
+  img?: string;
+  username?: string;
+  date?: string;
+  uid?: number;
+  category?: string;
 }
 
 export interface User {
   username?: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
+  id?: number;
+  image?: string;
 }
 
 export interface ErrorType {

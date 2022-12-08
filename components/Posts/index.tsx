@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles/Posts.module.scss";
 import { PostType } from "../../types/types";
+import axios from "axios";
+import { useRouter } from "next/router";
+import styles from "../../styles/Posts.module.scss";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
+  const category = useRouter().query;
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get(process.env.API_URL + `/posts${category}`);
+        setPosts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, [category]);
+
+  const getText = (html: string | undefined) => {
+    if (html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      return doc.body.textContent;
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -18,7 +40,7 @@ const Posts = () => {
             <Link href={`/post/${post.id}`}>
               <h1>{post.title}</h1>
             </Link>
-            <p>{post.desc}</p>
+            <p>{getText(post.desc)}</p>
             <button>Read More</button>
           </div>
         </div>

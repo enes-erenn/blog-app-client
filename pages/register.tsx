@@ -8,11 +8,7 @@ import styles from "../styles/Register.module.scss";
 
 const Register = () => {
   const router = useRouter();
-  const [user, setUser] = useState<User>({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [user, setUser] = useState<User | null>(null);
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const [error, setError] = useState<ErrorType>({
@@ -30,7 +26,7 @@ const Register = () => {
     setError({ message: "" });
 
     // PASSWORD CHECK
-    if (user.password !== passwordConfirm) {
+    if (user?.password !== passwordConfirm) {
       return setError({ message: "Passwords does not match!" });
     }
 

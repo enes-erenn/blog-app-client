@@ -1,10 +1,29 @@
+import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Side.module.scss";
 import { PostType } from "../../types/types";
 
-const Side = () => {
+interface Props {
+  category?: string;
+}
+
+const Side: React.FC<Props> = ({ category }) => {
   const [posts, setPosts] = useState<PostType[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get(
+          process.env.API_URL + `/posts/?category${category}`
+        );
+        setPosts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, [category]);
 
   return (
     <div className={styles.container}>
