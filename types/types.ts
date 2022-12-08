@@ -14,3 +14,10 @@ export interface User {
 export interface ErrorType {
   message: string;
 }
+
+export interface IAuthContextProps {
+  currentUser?: User | null;
+  login?: (user: User) => void;
+  logout?: (user: User) => void;
+  children?: any;
+}

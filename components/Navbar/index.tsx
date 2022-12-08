@@ -1,8 +1,12 @@
+import React, { useContext } from "react";
 import Link from "next/link";
-import React from "react";
+import { AuthContext } from "../../context/authContext";
+import CurrentUser from "./CurrentUser";
 import styles from "../../styles/Navbar.module.scss";
 
 const Navbar = () => {
+  const { currentUser, logout } = useContext(AuthContext);
+
   return (
     <div className={styles.container}>
       <div>
@@ -19,10 +23,7 @@ const Navbar = () => {
           <h6>DESIGN</h6>
         </Link>
       </ul>
-      <div className={styles.auth}>
-        <h6>John</h6>
-        <button>Logout</button>
-      </div>
+      <CurrentUser user={currentUser} logout={logout} />
       <div className={styles.write}>
         <Link href="/write">Write</Link>
       </div>

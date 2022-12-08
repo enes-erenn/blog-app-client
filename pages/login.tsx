@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Error from "../components/Error";
 import { ErrorType, User } from "../types/types";
 import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
+import { AuthContext } from "../context/authContext";
 
 const Login = () => {
   const router = useRouter();
+  const { login } = useContext(AuthContext);
   const [error, setError] = useState<ErrorType>({
     message: "",
   });
@@ -26,10 +28,11 @@ const Login = () => {
   ) => {
     e.preventDefault();
     setError({ message: "" });
+    if (!login) return;
 
     try {
       // LOGIN
-      await axios.post(process.env.API_URL + "/auth/login", user);
+      await login(user);
       router.push("/");
     } catch (err: any) {
       console.log(err);
