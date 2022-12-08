@@ -3,9 +3,11 @@ import Link from "next/link";
 import Error from "../components/Error";
 import { ErrorType, User } from "../types/types";
 import axios from "axios";
+import { useRouter } from "next/router";
 import styles from "../styles/Register.module.scss";
 
 const Register = () => {
+  const router = useRouter();
   const [user, setUser] = useState<User>({
     username: "",
     email: "",
@@ -25,6 +27,7 @@ const Register = () => {
     e: React.FormEvent<HTMLFormElement | HTMLButtonElement>
   ) => {
     e.preventDefault();
+    setError({ message: "" });
 
     // PASSWORD CHECK
     if (user.password !== passwordConfirm) {
@@ -33,12 +36,11 @@ const Register = () => {
 
     try {
       // REGISTERING
-      const res = await axios.post(
-        process.env.API_URL + "/auth/register",
-        user
-      );
-    } catch (err) {
+      await axios.post(process.env.API_URL + "/auth/register", user);
+      router.push("/");
+    } catch (err: any) {
       console.log(err);
+      setError({ message: err.response.data });
     }
   };
 

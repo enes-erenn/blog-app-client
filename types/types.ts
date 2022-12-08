@@ -6,7 +6,7 @@ export interface PostType {
 }
 
 export interface User {
-  username: string;
+  username?: string;
   email: string;
   password: string;
 }
