@@ -28,11 +28,17 @@ const Write = () => {
           desc: value,
         });
       } else {
-        await axios.post(process.env.API_URL + `/posts/`, {
-          ...post,
-          desc: value,
-          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-        });
+        await axios.post(
+          process.env.API_URL + `/posts/`,
+          {
+            ...post,
+            desc: value,
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          },
+          {
+            withCredentials: true,
+          }
+        );
       }
     } catch (err) {
       console.log(err);
