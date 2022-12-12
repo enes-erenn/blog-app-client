@@ -1,6 +1,8 @@
 .container {
   display: flex;
   gap: 20px;
+  padding: 2rem 0;
+  height: 90vh;
 
   .content {
     flex: 5;
@@ -14,9 +16,22 @@
     }
 
     .editor_container {
-      height: 300px;
+      height: 100%;
       overflow: scroll;
       border: 1px solid lightgray;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: lightgray;
+        border-radius: 1rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(225, 225, 225, 0.2);
+      }
 
       .editor {
         height: 100%;
@@ -38,14 +53,27 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 14px;
       color: #555;
 
+      .category {
+        margin: 1rem 0;
+      }
+
+      .info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+        flex-direction: column;
+      }
+
       h1 {
-        font-size: 20px;
+        font-size: 24px;
       }
 
       .file {
+        cursor: pointer;
         text-decoration: underline;
       }
 
@@ -58,7 +86,7 @@
           color: teal;
           background-color: #fff;
           border: 1px solid teal;
-          padding: 3px 5px;
+          padding: 6px;
         }
 
         :last-child {
@@ -66,7 +94,7 @@
           color: #fff;
           background-color: teal;
           border: 1px solid teal;
-          padding: 3px 5px;
+          padding: 6px;
         }
       }
     }

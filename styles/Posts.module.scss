@@ -3,11 +3,15 @@ $lightGreen: #b9e7e7;
 .container {
   display: flex;
   flex-direction: column;
-  gap: 150px;
+  margin: 2rem 0;
+  height: 100%;
 
   .post {
     display: flex;
     gap: 2rem;
+    margin: 2rem 0;
+    align-items: center;
+    justify-content: center;
 
     &:nth-child(2n + 1) {
       flex-direction: row-reverse;
@@ -16,6 +20,8 @@ $lightGreen: #b9e7e7;
     .img_container {
       flex: 2;
       position: relative;
+      width: 100%;
+      height: 24rem;
 
       &::after {
         content: "";
@@ -27,12 +33,6 @@ $lightGreen: #b9e7e7;
         left: -20px;
         z-index: -1;
       }
-
-      img {
-        width: 100%;
-        max-height: 400px;
-        object-fit: cover;
-      }
     }
 
     .content {
@@ -40,13 +40,18 @@ $lightGreen: #b9e7e7;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 1rem 0;
 
       h1 {
-        font-size: 48px;
+        font-size: 3rem;
+        margin: 0;
+        color: rgb(40, 40, 40);
       }
 
       p {
         font-size: 18px;
+        max-height: 18rem;
+        overflow: hidden;
       }
 
       button {
