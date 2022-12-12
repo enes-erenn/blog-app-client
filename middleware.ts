@@ -4,7 +4,7 @@ import axios from "axios";
 
 const secret = process.env.NEXT_PUBLIC_JWT_SEC;
 
-const _middleware = async (req: NextRequest) => {
+const _middleware = async (req: NextRequest, res: NextResponse) => {
   let token = JSON.stringify(
     Object.fromEntries(req.cookies._parsed)?.access_token?.value
   )?.replaceAll('"', "");
@@ -14,16 +14,12 @@ const _middleware = async (req: NextRequest) => {
   // Protected Routes
   if (url.includes("http://localhost:3000/write")) {
     if (token && secret) {
-      await verify(token, secret).then(async (res) => {
-        if (res.exp > new Date().getTime()) {
+      await verify(token, secret).then(async (result) => {
+        if (result.exp > new Date().getTime()) {
           // User is authenticated and token is valid
           return;
         } else {
-          // User is authenticated and token is not valid, make user logout
-          await axios.post(process.env.API_URL + "/auth/logout", {
-            withCredentials: true,
-          });
-          localStorage.clear();
+          return;
         }
       });
     } else {

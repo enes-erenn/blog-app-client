@@ -6,6 +6,10 @@ const nextConfig = {
     API_URL: "http://localhost:8800/api",
     NEXT_PUBLIC_JWT_SEC: "auth_jwt_key",
   },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    domains: ["res.cloudinary.com"],
+  },
 };
 
 module.exports = nextConfig;

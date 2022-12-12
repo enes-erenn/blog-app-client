@@ -12,11 +12,19 @@ $lightGreen: #b9e7e7;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 10px;
     list-style: none;
+
     h6 {
-      font-size: 14px;
-      font-weight: 300;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: all ease 0.1s;
+      padding: 1rem 10px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: rgba(200, 200, 200, 0.14);
+      }
     }
   }
 
@@ -29,24 +37,34 @@ $lightGreen: #b9e7e7;
     button {
       border: none;
       cursor: pointer;
+      padding: 10px;
+
+      border-radius: 10px;
     }
   }
-  .write {
-    background-color: $lightGreen;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  .right {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 300;
-    border: 1px solid transparent;
-    cursor: pointer;
+    gap: 1rem;
 
-    &:hover {
-      background-color: #fff;
-      color: teal;
-      border: 1px solid teal;
+    .write {
+      background-color: $lightGreen;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 300;
+      border: 1px solid transparent;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fff;
+        color: teal;
+        border: 1px solid teal;
+      }
     }
   }
 }
