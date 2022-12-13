@@ -53,22 +53,6 @@ $lightGreen: #b9e7e7;
         max-height: 18rem;
         overflow: hidden;
       }
-
-      button {
-        width: max-content;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        background-color: #fff;
-        border: 1px solid teal;
-        color: teal;
-
-        &:hover {
-          border: 1px solid #fff;
-          background-color: $lightGreen;
-          color: #fff;
-        }
-      }
     }
   }
 }

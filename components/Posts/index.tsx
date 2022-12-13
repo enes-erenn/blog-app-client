@@ -3,23 +3,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { PostType } from "../../types/types";
 import axios from "axios";
-import { useRouter } from "next/router";
+
 import styles from "../../styles/Posts.module.scss";
 
-const Posts = () => {
+interface Props {
+  category?: string | undefined;
+}
+
+const Posts: React.FC<Props> = ({ category }) => {
   const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(process.env.API_URL + `/posts`);
+        const res = await axios.get(
+          category
+            ? process.env.API_URL + `/posts/?category=${category}`
+            : process.env.API_URL + `/posts`
+        );
         setPosts(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getData();
-  }, []);
+  }, [category]);
 
   const getText = (html: string | undefined) => {
     if (html) {
@@ -45,7 +53,6 @@ const Posts = () => {
               <h1>{post.title}</h1>
             </Link>
             <p>{getText(post.desc)}</p>
-            <button>Read More</button>
           </div>
         </div>
       ))}

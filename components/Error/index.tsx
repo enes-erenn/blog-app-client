@@ -9,4 +9,4 @@ const Error: React.FC<Props> = ({ error }) => {
   return <div style={{ color: "tomato" }}>{error.message}</div>;
 };
 
-export default Error;
+export default React.memo(Error);

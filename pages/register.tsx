@@ -44,9 +44,9 @@ const Register = () => {
     <div className={styles.container}>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <h6>
+        <h4>
           Already have an account? <Link href="/login">Login</Link>
-        </h6>
+        </h4>
         <input
           required
           type="text"

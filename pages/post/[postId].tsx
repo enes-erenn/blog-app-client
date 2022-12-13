@@ -19,7 +19,7 @@ const Post = () => {
     const getData = async () => {
       try {
         const res = await axios.get(process.env.API_URL + `/posts/${postId}`);
-        setPost(res.data);
+        setPost(res.data[0]);
       } catch (err) {
         console.log(err);
       }
@@ -36,33 +36,49 @@ const Post = () => {
     }
   };
 
+  const getText = (html: string | undefined) => {
+    if (html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      return doc.body.textContent;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles.img_container}>
-          <Image src={post?.img || ""} alt="" />
-        </div>
-        <div className={styles.user}>
-          <div className={styles.userImage}>
-            <Image src={currentUser?.image || ""} alt="" />
+        <div>
+          <div className={styles.img_container}>
+            <Image
+              src={post?.img || ""}
+              alt="Post"
+              layout="fill"
+              objectFit="cover"
+            />
           </div>
-          <div className={styles.userInfo}>
-            <span>{post?.username}</span>
-            <p>Posted {moment(post?.date).fromNow()}</p>
-          </div>
-          {currentUser?.id === post?.uid && (
-            <div className={styles.edit}>
-              <Link href={`/write?edit=2`}>
-                <button>Edit</button>
-              </Link>
-              <button onClick={handleDeletePost}>Delete</button>
+          <div className={styles.user}>
+            {currentUser?.image && (
+              <div className={styles.userImage}>
+                <Image src={currentUser?.image || ""} alt="" />
+              </div>
+            )}
+            <div className={styles.userInfo}>
+              <span>{post?.username}</span>
+              <p>Posted {moment(post?.date).fromNow()}</p>
             </div>
-          )}
+            {currentUser?.id === post?.uid && (
+              <div className={styles.edit}>
+                <Link href={`/write?edit=2`}>
+                  <button>Edit</button>
+                </Link>
+                <button onClick={handleDeletePost}>Delete</button>
+              </div>
+            )}
+          </div>
         </div>
         <h1>{post?.title}</h1>
-        <div>{post?.desc}</div>
+        <p>{getText(post?.desc)}</p>
       </div>
-      <Side category={post?.category} />
+      <Side category={post?.category} currentPost={post?.id} />
     </div>
   );
 };

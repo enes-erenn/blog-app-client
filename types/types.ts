@@ -1,7 +1,7 @@
 export interface PostType {
   title?: string;
   desc?: string;
-  id?: string;
+  id?: number;
   img?: string;
   username?: string;
   date?: string;

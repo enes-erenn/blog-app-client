@@ -2,10 +2,9 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Error from "../components/Error";
 import { ErrorType, User } from "../types/types";
-import axios from "axios";
 import { useRouter } from "next/router";
-import styles from "../styles/Login.module.scss";
 import { AuthContext } from "../context/authContext";
+import styles from "../styles/Login.module.scss";
 
 const Login = () => {
   const router = useRouter();
@@ -44,9 +43,9 @@ const Login = () => {
     <div className={styles.container}>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <h6>
+        <h4>
           Don&apos;t you have an account? <Link href="/register">Register</Link>
-        </h6>
+        </h4>
         <input
           required
           type="email"

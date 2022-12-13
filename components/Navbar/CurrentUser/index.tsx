@@ -19,4 +19,4 @@ const CurrentUser: React.FC<Props> = ({ user, logout }) => {
   return <></>;
 };
 
-export default CurrentUser;
+export default React.memo(CurrentUser);

@@ -1,12 +1,12 @@
 .container {
   display: flex;
   gap: 50px;
+  margin: 2rem 0;
 
   .content {
     flex: 5;
     display: flex;
     flex-direction: column;
-    gap: 30px;
 
     h1 {
       font-size: 42px;
@@ -18,23 +18,29 @@
       line-height: 30px;
     }
 
-    .img_container {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-
-    .user {
-      .userImage {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
+    div {
+      .img_container {
+        position: relative;
+        width: 100%;
+        height: 24rem;
       }
+      .user {
+        .userImage {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
 
-      .userInfo {
-        span {
-          font-weight: bold;
+        .userInfo {
+          margin: 10px;
+          span {
+            font-weight: bold;
+          }
+          p {
+            margin: 0;
+            padding: 0;
+          }
         }
       }
     }

@@ -1,42 +1,52 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import styles from "../../styles/Side.module.scss";
 import { PostType } from "../../types/types";
+import Link from "next/link";
+import styles from "../../styles/Side.module.scss";
 
 interface Props {
   category?: string;
+  currentPost?: number;
 }
 
-const Side: React.FC<Props> = ({ category }) => {
+const Side: React.FC<Props> = ({ category, currentPost }) => {
   const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await axios.get(
-          process.env.API_URL + `/posts/?category${category}`
+          process.env.API_URL + `/posts/?category=${category}`
         );
-        setPosts(res.data);
+        setPosts(res.data.filter((p: PostType) => p.id !== currentPost));
       } catch (err) {
         console.log(err);
       }
     };
     getData();
-  }, [category]);
+  }, [category, currentPost]);
 
   return (
     <div className={styles.container}>
       <h3>Other posts you may like</h3>
       {posts.map((post) => (
         <div key={post.id} className={styles.post}>
-          <Image src="" alt="" />
-          <h2>{post.title}</h2>
-          <button>Read More</button>
+          <div className={styles.img_container}>
+            <Image
+              src={post?.img || ""}
+              alt="Post"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <Link href={`/post/${post.id}`}>
+            <h3>{post.title}</h3>
+          </Link>
         </div>
       ))}
     </div>
   );
 };
 
-export default Side;
+export default React.memo(Side);
